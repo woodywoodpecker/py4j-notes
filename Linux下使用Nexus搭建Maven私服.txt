@@ -1,0 +1,34 @@
+[root@vultr softwares]# wget https://sonatype-download.global.ssl.fastly.net/nexus/oss/nexus-2.11.2-03-bundle.tar.gz
+[root@vultr opt]# tar xvzf softwares/nexus-2.11.2-03-bundle.tar.gz 
+[root@vultr opt]# useradd nexus
+[root@vultr opt]# chown -R nexus:nexus nexus-2.11.2-03/ sonatype-work/
+[root@vultr opt]# ls -ld *
+drwxr-xr-x 8 nexus nexus 4096 Feb 13  2015 nexus-2.11.2-03
+drwxr-xr-x 2 root  root  4096 Jun 27 01:18 softwares
+drwxr-xr-x 3 nexus nexus 4096 Feb 13  2015 sonatype-work
+
+[root@vultr opt]# vim nexus-2.11.2-03/bin/nexus
+	修改RUN_AS_USER=nexus
+[root@vultr opt]# cd /etc/init.d/
+[root@vultr init.d]# ln -s /opt/nexus-2.11.2-03/bin/nexus
+[root@vultr init.d]# ls 
+functions  netconsole  network  nexus  README
+[root@vultr init.d]# 
+[root@vultr init.d]# /etc/init.d/nexus status
+Nexus OSS is not running.
+[root@vultr init.d]# 
+[root@vultr init.d]# 
+[root@vultr init.d]# /etc/init.d/nexus start
+Starting Nexus OSS...
+Started Nexus OSS.
+[root@vultr init.d]#
+[root@vultr init.d]# ps -ef | grep nexus
+nexus    13098     1  0 01:23 ?        00:00:00 /opt/nexus-2.11.2-03/bin/../bin/jsw/linux-x86-64/wrapper /opt/nexus-2.11.2-03/bin/../bin/jsw/conf/wrapper.conf wrapper.syslog.ident=nexus wrapper.pidfile=/opt/nexus-2.11.2-03/bin/../bin/jsw/linux-x86-64/nexus.pid wrapper.daemonize=TRUE
+nexus    13100 13098 99 01:23 ?        00:00:06 java -XX:MaxPermSize=192m -Djava.io.tmpdir=./tmp -Djava.net.preferIPv4Stack=true -Dcom.sun.jndi.ldap.connect.pool.protocol=plain ssl -Xms256m -Xmx768m -Djava.library.path=bin/jsw/lib -classpath bin/jsw/lib/wrapper-3.2.3.jar:./lib/jetty-deploy-8.1.11.v20130520.jar:./lib/jetty-continuation-8.1.11.v20130520.jar:./lib/logback-core-1.1.2.jar:./lib/jetty-xml-8.1.11.v20130520.jar:./lib/slf4j-api-1.7.6.jar:./lib/jetty-webapp-8.1.11.v20130520.jar:./lib/jetty-rewrite-8.1.11.v20130520.jar:./lib/jetty-io-8.1.11.v20130520.jar:./lib/jetty-server-8.1.11.v20130520.jar:./lib/jetty-servlet-8.1.11.v20130520.jar:./lib/logback-classic-1.1.2.jar:./lib/metrics-jetty-2.2.0.jar:./lib/jetty-util-8.1.11.v20130520.jar:./lib/jetty-security-8.1.11.v20130520.jar:./lib/jetty-jmx-8.1.11.v20130520.jar:./lib/nexus-bootstrap-2.11.2-03.jar:./lib/javax.servlet-3.0.0.v201112011016.jar:./lib/logback-access-1.1.2.jar:./lib/metrics-core-2.2.0.jar:./lib/jetty-client-8.1.11.v20130520.jar:./lib/jul-to-slf4j-1.7.6.jar:./lib/jetty-http-8.1.11.v20130520.jar:./lib/plexus-interpolation-1.16.jar:./lib/metrics-logback-2.2.0.jar:./conf/ -Dwrapper.key=8K3Ld6438T6r1hbZ -Dwrapper.port=32000 -Dwrapper.jvm.port.min=31000 -Dwrapper.jvm.port.max=31999 -Dwrapper.pid=13098 -Dwrapper.version=3.2.3 -Dwrapper.native_library=wrapper -Dwrapper.service=TRUE -Dwrapper.cpu.timeout=10 -Dwrapper.jvmid=1 org.sonatype.nexus.bootstrap.jsw.JswLauncher ./conf/jetty.xml ./conf/jetty-requestlog.xml
+root     13133 12773  0 01:23 pts/2    00:00:00 grep --color=auto nexus
+[root@vultr init.d]# 
+[root@vultr init.d]# 
+
+
+访问http://149.28.35.210:8081/nexus
+默认的登录账号	admin/admin123

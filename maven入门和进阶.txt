@@ -1,0 +1,20 @@
+1.什么是maven
+	管理jar包，打包工程
+
+2.maven的安装和使用
+	MAVEN_OPTS => 全局环境变量
+
+3.maven的结构
+
+
+4.坐标和依赖
+
+	mvn dependency:tree
+	间接依赖
+	
+	mvn versions:set -DnewVersion=1.1-SNAPSHOT
+
+5.生命周期和插件
+
+
+6.Inherit和module

@@ -1,0 +1,30 @@
+1，tomcat的安全性是通过验证阀这个入口进来，实施的系列验证
+
+2，验证阀是调用的context上面注入的领域对象的authenticate（）方法来验证用户的安全性。
+   领域对象其实是存放了用户的用户名儿，密码，角色之类的资源（当然它也可以存放访问这些资源的存储器，例如查询数据库）
+	
+3，领域对象是和context关联的，一个context只有一个领域对象
+
+4，领域对象其实就是Realm这个接口的实例，常见的Realm有JDBCRealm，JNDIRealm，MemoryRealm，UserDatabaseRealm
+
+5，默认的是MemoryRealm，这个realm加载的时候，会读取tomcat-user.xml这个文件进行实例化
+
+6，GenericPrinciple是我们的主体对象，它必须包含一对用户名儿和密码，并提供了一个api叫做hasRole()
+
+7，LoginConfig是存放了我们web.xml里面"login-config"这里对应的配置，getRealmName是获取领域对象的名字，
+	getAuthName是获取身份验证方法的名字：BASIC，DIGEST，FORM，CLIENT-CERT
+	
+8，
+
+
+
+authenticate:39, SimpleRealm (org.py4j.realm)
+authenticate:159, BasicAuthenticator (org.apache.catalina.authenticator)
+invoke:485, AuthenticatorBase (org.apache.catalina.authenticator)
+invokeNext:640, StandardPipeline$StandardPipelineValveContext (org.apache.catalina.core)
+invoke:479, StandardPipeline (org.apache.catalina.core)
+invoke:993, ContainerBase (org.apache.catalina.core)
+invoke:2339, StandardContext (org.apache.catalina.core)
+process:965, HttpProcessor (org.apache.catalina.connector.http)
+run:1078, HttpProcessor (org.apache.catalina.connector.http)
+run:-1, Thread (java.lang)
