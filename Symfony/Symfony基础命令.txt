@@ -1,0 +1,5 @@
+查看当前运行的Symfony版本
+[vagrant@localhost oroapp]$ oro-php71 bin/console --version
+Symfony 3.4.9 (kernel: src, env: dev, debug: true)
+
+

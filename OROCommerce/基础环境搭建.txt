@@ -1,0 +1,12 @@
+OS : win7
+virtualbox version : 5.1.26
+vagrant version : 1.9.3
+
+run "vagrant plugin install vagrant-vbguest"
+修改Vagrantfile  =>  config.vm.network "forwarded_port", guest: 22, host: 1022, host_ip: "127.0.0.1", id: 'ssh'
+
+在跑 vagrant up 命令的时候，注意修改ssh允许密码登录
+修改nginx的一个目录映射
+
+跑vagrant provision
+ 

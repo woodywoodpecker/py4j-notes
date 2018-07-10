@@ -1,0 +1,7 @@
+安装
+[vagrant@localhost oroapp]$ yum install mlocate
+
+执行updatedb，更新文件索引
+
+查找firefox相关的目录和文件
+locate firefox

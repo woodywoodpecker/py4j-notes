@@ -1,0 +1,6 @@
+cd /home/vagrant/project/oroapp
+
+seo "php bin/console cache:clear --env=dev" // 清理dev的cache
+seo "php bin/console oro:assets:install"    // install
+seo "php bin/console assetic:dump"          // 打包
+
