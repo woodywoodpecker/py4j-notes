@@ -1,0 +1,25 @@
+SCL 的创建就是为了给 RHEL/CentOS 用户提供一种以方便、安全地安装和使用应用程序和运行时环境的多个（而且可能是更新的）版本的方式，同时避免把系统搞乱。与之相对的是第三方源，它们可能会在已安装的包之间引起冲突。
+
+
+CentOS 版本6.5
+yum  install centos-release-SCL 
+yum install scl-utils-build 
+
+查看从 SCL 中安装的包的列表 
+[vagrant@localhost oroapp]$ scl --list
+oro-elasticsearch24
+oro-php71
+oro-rabbitmq-server36
+oro-redis4
+rh-postgresql96
+[vagrant@localhost oroapp]$ 
+
+要针对python命令启用 python33 包 
+$ scl enable python33 'python –version'
+	Python3.3.2
+
+如果python2.7不在scl的管理包里面
+[vagrant@localhost oroapp]$ scl enable python2.7 bash
+Unable to open /etc/scl/conf/python2.7!
+[vagrant@localhost oroapp]$ 
+[vagrant@localhost oroapp]$ 
