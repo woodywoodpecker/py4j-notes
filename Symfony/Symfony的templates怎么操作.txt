@@ -1,0 +1,48 @@
+Symfony使用的模板语言叫做Twig。
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome to Symfony!</title>
+    </head>
+    <body>
+        <h1>{{ page_title }}</h1>
+
+        <ul id="navigation">
+            {% for item in navigation %}
+                <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
+
+Twig定义了三种特殊的语法
+{{ ... }}	打印变量或者输出一个表达式的结果到模板。
+{% ... %}	干活儿的，可以做一些逻辑处理，例如使用for循环。
+{# ... #}	注释，相当于/* comment */在php代码里的作用，注释掉的部分不会渲染到模板里。
+
+{{ title|upper }}	输出title变量的值，同时做大写处理
+
+{% for i in 1..10 %}
+    <div class="{{ cycle(['even', 'odd'], i) }}">
+      <!-- some HTML here -->
+    </div>
+{% endfor %}
+
+
+如果要在template里面使用{% extends %}，那么它必须是第一个tag。
+
+{% block %}定义最好在base的template里面，child template不用定义{% block %}。
+如果出现了相同的多行的content在templates里面，那么建议将这部分内容用block放到parent template。
+如果想要获取parent template的content of a block，可以使用{{ parent() }} 。
+
+
+Symfony默认的templates放在下面两个目录
+app/Resources/views/
+vendor/path/to/CoolBundle/Resources/views/
+
+
+bundle里面是怎么关联上一个template的：
+-------------------------------------------
+Symfony使用了一个@BundleName/directory/filename.html.twig的命名规则来关联template。
+

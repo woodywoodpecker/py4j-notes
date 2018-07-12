@@ -1,0 +1,7 @@
+[vagrant@localhost ~]$ date
+Wed Jul 11 01:11:19 UTC 2018
+[vagrant@localhost ~]$ cat /etc/redhat-release 
+CentOS Linux release 7.5.1804 (Core) 
+[vagrant@localhost ~]$ cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+[vagrant@localhost ~]$ date
+Wed Jul 11 09:12:09 CST 2018
