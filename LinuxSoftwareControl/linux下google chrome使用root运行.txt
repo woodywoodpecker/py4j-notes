@@ -1,0 +1,43 @@
+第一步当然是下载安装包啦，贴两个地址在这，免得到处再去百度了
+
+对于32位版本可以使用如下链接下载：
+
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb
+
+对于64位版本可以使用如下链接下载：
+
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+当然= =，我可不保证链接永久有效，要是不可以了的话自己还是要去百度哈，这个不是主要问题
+
+
+当我安装好浏览器准备愉快的刷剧的时候发现了两个坑爹的问题
+
+1.chrome浏览器不允许root用户启动
+
+2.在折腾好root启动以后发现提示我flash插件不是最新版本无法使用。
+
+
+对于第一个问题来讲其实最好的解决办法还是新建一个用户吧= =，本来用root用户是不提倡的，但是如果像我一样懒得话好吧我也有办法解决。
+
+首先百度了一下
+
+    找到启动文件 ：/opt/google/chrome/google-chrome
+    编辑该文件，修改最后一行将：
+
+exec -a "$0" "$HERE/chrome" "$@"  
+修改为：
+exec -a "$0" "$HERE/chrome" "$@" --user-data-dir $HOME 
+找这个文件的这个地方是没错的，但是注意@后添加的这段字符串，他们添加--user-data-dir是因为
+他们提示的就是这样，而我的浏览器启动时提示的和 --no-sandbox有关，我向那样添加以后并没有用
+所以我最后改写为 exec -a "$0" "$HERE/chrome"  "$@" --no-sandbox $HOME,改完这个问题解决！
+
+接下来就是flash插件的问题了
+1.去flash官网下载linux下的插件，下载好以后，解压出libpepflashplayer.so和manifest.json这两个文件
+2.将解压出来的两个文件拷贝至/opt/google/chrome/PepperFlash路径下，没有这个文件夹的话自己mkdir一个
+3.最后一步，继续打开刚才的文件vim /opt/google/chrome/google-chrome  还是找刚才改的那个地方，在后面加上--ppapi-flash-path=/opt/google/chrome/PepperFlash/libpepflashplayer.so即可，主意，要和前面留一个空格哦。
+
+总结一下
+1.两个问题需要修改的双同一个文件的同一个地方，改完以后整体如下：
+ exec -a "$0" "$HERE/chrome"  "$@" --no-sandbox $HOME --ppapi-flash-path=/opt/google/chrome/PepperFlash/libpepflashplayer.so（和上面没有换行哦，这是排版问题）
+2.解决第一个问题时注意看你软件的提示，按他提示的修改应该就不错，实在不行--no-sandbox 和 --user-data-dir你就照着都试一下

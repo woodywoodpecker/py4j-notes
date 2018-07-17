@@ -1,0 +1,117 @@
+第一，安装X window+gnome desktop+freenx
+
+yum groupinstall "X Window System"
+
+yum groupinstall "GNOME Desktop Environment"
+
+3,yum install freenx
+
+4.yum groupinstall chinese-support
+
+第二，安装vnc服务器端
+
+1，yum –y install vnc*
+
+2，运行vncserver设置桌面密码
+
+3，编辑/root/.vnc/xstartup
+
+第三：安装virtualbox
+
+首先到官方处下载安装包 http://www.virtualbox.org/wiki/Linux_Downloads ，由于我系统是64位的所以我下载的是64位安装包，下载好后就执行安装包安装。
+
+以root账号登录到CentOS系统。
+
+VirtualBox需要kernel modules的支持，所以系统要先安装kernel。
+
+#yum install kernel-devel
+
+#yum install gcc
+
+运行上面两个命令，其中第一个命令安装了kernel-devel，第二个命令安装了kernel-headers、glibc-headers、glibc-devel和gcc，并更新了glibc-common。
+
+通过U盘，将VirtualBox-4.0-4.0.0_69151_rhel5-1.i386.rpm拷到root的home目录下。打开终端，进入到home目录，执行安装VBox的命令：
+
+#rpm –ivh VirtualBox-4.0-4.0.0_69151_rhel5-1.i386.rpm
+
+啊缺少文件
+
+yum install SDL
+
+再次运行
+
+#rpm –ivh VirtualBox-4.0-4.0.0_69151_rhel5-1.i386.rpm
+
+安装过程，除了DSA signature警告外，还有VBox内核模块安装失败的报错：
+
+Trying to register the VirtualBox kernel modules using DKMS[FAILED]
+
+(Failed, trying without DKMS)
+
+Recompiling VirtualBox kernel modules [FAILED]
+
+(look at /var/log/vbox-install.log to find out what went wrong)
+
+VBox安装过程中系统自动创建了一个“vboxusers”用户组，需把用户加入到该组才能使用VBox。把当前的root用户加入到vboxusers中，命令如下：
+
+#usermod –G vboxusers –a root
+
+此时，建立、并且启动VirtualBox kernel module：
+
+#/etc/init.d/vboxdrv setup
+
+也出现同样报错，
+
+搜索了一下“DKMS”，百度百科对DKMS是这样描述的：Oikawa等人在1996年提出一种与LKM类似的动态核心模块（DKMs）技术。与LKM一样，DKMs以文件的形式存储并能在系统运行过程中动态地加载和卸载。DKMs由一个用户层的DKM服务器来管理，并非由内核来管理。当核心需要某模块时，由DKM服务器负责把相应的DKM加载；当核心的内存资源紧缺时，由DKM服务器负责卸载一个没有被使用的DKM。
+
+试途通过命令
+
+#yum list DKMS*
+
+下载安装DKMS，但并没有发现DKMS源。（参考文中，是在Fedora14下运行该命令能发现源的）。后来到http://linux.dell.com/dkms/网站下载了最新的dkms驱动程序包 dkms-2.1.1.2-1.noarch.rpm。
+
+通过命令
+
+#rpm –ivh dkms-2.1.1.2-1.noarch.rpm
+
+安装该包后，再运行
+
+#/etc/init.d/vboxdrv setup
+
+命令，还是存在问题，但不是dkms问题，而仅仅是内核的问题，
+
+报错如下：
+
+Trying to register the VirtualBox kernel modules using DKMS
+
+Error!Your kernel headers for kernel 2.6.18-194.el5PAE cannot be found at /lib/moduals/2.6.18-194.el5PAE/build or /lib/modules/2.6.1-194.el5PAE/source[FAILED]
+
+(Failed,trying without DKMS)
+
+Recompiling VirtualBox kernel modules[FAILED]
+
+(look at /var/log/vbox-install.log to find out what went wrong)
+
+若直接运行VBox，也有类似的警告
+
+#VirtualBox
+
+WARNING:The vboxdrv kernel module is not loaded.Either there is no module available for the current kernel(2.6.18-194.el5PAE) or it failed to load.Please recompile the kernel module and install it by
+
+sudo /etc/init.d/vboxdrv setup
+
+You will not be able to start VMs until this problem is fixed.
+
+执行 $ /etc/init.d/vboxdrv setup 后报错
+
+Trying to register the VirtualBox kernel modules using DKMSError! echo
+
+Your kernel headers for kernel 2.6.38.6-26.rc1.fc15.x86_64 cannot be found at
+
+/lib/modules/2.6.38.6-26.rc1.fc15.x86_64/build or /lib/modules/2.6.38.6-26.rc1.fc15.x86_64/source.
+
+从错误提示来看是内核出问题，没安装到，于是上网搜了一通，看到很多人都遇到这样的问题，终于在一个老外的论坛上找到了解决办法。
+
+先 $ yum install kernel-devel-$(uname -r) ，提示木有 PAE 包，然后安装 PAE 包 $ yum install kernel-PAE-devel 。
+
+然后到此完毕！一切ok！ 
