@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documents</title>
+</head>
+<body>
+
+</body>
+
+<script src="../lib/jquery-1.10.2.js"></script>
+<script src="../lib/underscore.js"></script>
+<script src="../lib/backbone.js"></script>
+<script>
+    (function ($) {
+
+        var Document = Backbone.Model.extend({
+            defaults: {
+                name: 'document name',
+                type: 'pdf'
+            }
+        });
+
+        var DocumentList = Backbone.Collection.extend({
+            model: Document,
+            sortFlag: -1,
+            comparator: function (item) {
+                if (this.sortFlag == 1) {
+                    return item.attributes.name;
+                } else {
+                    return -item.attributes.name;
+                }
+            },
+            initialize: function () {
+                _.bindAll(this, 'comparator');
+            }
+        });
+
+        var DocumentView = Backbone.View.extend({
+            tagName: 'li',
+            render: function () {
+                $(this.el).html('<span>' + this.model.get('name') + ' : ' + this.model.get('type') + '</span>');
+                return this; // for chainable calls, like .render().el
+            },
+        });
+
+        var DocumentListView = Backbone.View.extend({
+            el: $('body'),
+            events: {
+                'click button#order': 'order'
+            },
+            initialize: function () {
+                this.collection = new DocumentList();
+                var d1 = new Document();
+                d1.set({
+                    name: '22',
+                    type: 'png'
+                });
+                this.collection.add(d1);
+                var d2 = new Document();
+                d2.set({
+                    name: '11',
+                    type: 'jpeg'
+                });
+                this.collection.add(d2);
+                var d3 = new Document();
+                d3.set({
+                    name: '33',
+                    type: 'pdf'
+                });
+                this.collection.add(d3);
+
+                this.render();
+
+                _.bindAll(this, 'order', 'reRender');
+
+                this.collection.bind('sort',this.reRender);
+            },
+
+            order: function () {
+                var self = this;
+                self.collection.sortFlag = 1;
+                self.collection.sort();
+            },
+
+            render: function () {
+                var self = this;
+                $(this.el).append("<button id='order'>order this</button>");
+                $(this.el).append("<ul></ul>");
+                _(this.collection.models).each(function (item) { // in case collection is not empty
+                    self.appendItem(item);
+                }, this);
+            },
+
+            appendItem: function (item) {
+                var documentView = new DocumentView({
+                    model: item
+                });
+                $('ul', this.el).append(documentView.render().el);
+            },
+
+            reRender: function () {
+                var self = this;
+                $('li').detach();
+                _(this.collection.models).each(function (item) { // in case collection is not empty
+                    self.appendItem(item);
+                }, this);
+            }
+        });
+
+        var documentListView = new DocumentListView();
+    })(jQuery);
+</script>
+
+</html>
