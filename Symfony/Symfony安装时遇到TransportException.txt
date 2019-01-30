@@ -1,0 +1,31 @@
+[root@localhost github]# composer  create-project symfony/framework-standard-edition symfony_3_4_x "3.4.*"
+
+                                                                             
+  [Composer\Downloader\TransportException]                                   
+  Content-Length mismatch, received 52543 bytes out of the expected 1192339  
+                                                                             
+
+create-project [-s|--stability STABILITY] [--prefer-source] [--prefer-dist] [--repository REPOSITORY] [--repository-url REPOSITORY-URL] [--dev] [--no-dev] [--no-custom-installers] [--no-scripts] [--no-progress] [--no-secure-http] [--keep-vcs] [--remove-vcs] [--no-install] [--ignore-platform-reqs] [--] [<package>] [<directory>] [<version>]
+
+[root@localhost github]# composer config -g repo.packagist composer https://packagist.phpcomposer.com
+[root@localhost github]# composer  create-project symfony/framework-standard-edition symfony_3_4_x "3.4.*"
+Installing symfony/framework-standard-edition (v3.4.12)
+  - Installing symfony/framework-standard-edition (v3.4.12): Downloading (100%)         
+Created project in symfony_3_4_x
+Loading composer repositories with package information
+Installing dependencies (including require-dev) from lock file
+Package operations: 39 installs, 0 updates, 0 removals
+  - Installing doctrine/lexer (v1.0.1): Loading from cache
+  - Installing doctrine/annotations (v1.4.0): Loading from cache
+  - Installing twig/twig (v1.35.3): Loading from cache
+  - Installing paragonie/random_compat (v2.0.15): Downloading (100%)         
+  - Installing symfony/polyfill-php70 (v1.8.0): Loading from cache
+  - Installing symfony/polyfill-util (v1.8.0): Loading from cache
+  - Installing symfony/polyfill-php56 (v1.8.0): Loading from cache
+  - Installing symfony/polyfill-mbstring (v1.8.0): Loading from cache
+  - Installing symfony/symfony (v3.4.12): Downloading (65%)          
+Downloading (connecting...)
+Downloading (0%)    Failed to download symfony/symfony from dist: Content-Length mismatch, received 55420 bytes out of the expected 8760480
+    Now trying to download from source
+  - Installing symfony/symfony (v3.4.12): Cloning c36f8cb21b
+

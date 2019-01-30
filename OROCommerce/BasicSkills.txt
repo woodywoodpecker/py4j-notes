@@ -1,0 +1,6 @@
+mailcatcher
+
+查看有哪些bundle
+php bin/console config:dump-reference
+
+

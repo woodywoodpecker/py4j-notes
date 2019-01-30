@@ -1,0 +1,28 @@
+一、通过文件方式
+
+1.在~/下， touch创建文件 .git-credentials, 用vim编辑此文件，输入内容格式：
+
+touch .git-credentials
+vim .git-credentials
+在里面按“i”然后输入： https://{username}:{password}@github.com 
+
+比如 https://account:password@github.com
+
+2. 在终端下执行
+
+git config --global credential.helper store
+3. 可以看到~/.gitconfig文件，会多了一项：
+
+[credential]
+helper = store
+4.OK
+
+ 
+
+二、通过缓存方式
+
+要求：git版本需要>=1.7.10
+
+git config --global credential.helper cache
+# 默认缓存密码15分钟，可以改得更长, 比如1小时
+git config --global credential.helper 'cache --timeout=3600'

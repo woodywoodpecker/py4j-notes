@@ -1,0 +1,50 @@
+parameters:
+    database_driver: pdo_pgsql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: oro
+    database_user: postgres
+    database_password: postgres
+    database_driver_options: {  }
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_port: null
+    mailer_encryption: null
+    mailer_user: null
+    mailer_password: null
+    websocket_bind_address: 0.0.0.0
+    websocket_bind_port: 8080
+    websocket_frontend_host: '*'
+    websocket_frontend_port: 8080
+    websocket_frontend_path: ''
+    websocket_backend_host: '*'
+    websocket_backend_port: 8080
+    websocket_backend_path: ''
+    search_engine_name: elastic_search
+    search_engine_host: 127.0.0.1
+    search_engine_port: null
+    search_engine_index_prefix: oro_search
+    search_engine_username: null
+    search_engine_password: null
+    search_engine_ssl_verification: null
+    search_engine_ssl_cert: null
+    search_engine_ssl_cert_password: null
+    search_engine_ssl_key: null
+    search_engine_ssl_key_password: null
+    website_search_engine_index_prefix: oro_website_search
+    web_backend_prefix: /admin
+    session_handler: snc_redis.session.handler
+    redis_dsn_session: 'redis://127.0.0.1:6379/0'
+    redis_dsn_cache: 'redis://127.0.0.1:6379/1'
+    redis_dsn_doctrine: 'redis://127.0.0.1:6379/2'
+    redis_setup: standalone
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt
+    installed: null
+    assets_version: 1ee4ffc5
+    assets_version_strategy: time_hash
+    enterprise_licence: null
+    message_queue_transport: amqp
+    message_queue_transport_config: { host: localhost, port: '5672', user: rbmquser, password: rbmqpassword, vhost: / }
+    enable_price_sharding: false
+

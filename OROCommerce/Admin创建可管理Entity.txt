@@ -1,0 +1,15 @@
+1. Create view page for PO entity
+First create a view page for PO entity (with index page). Opportunity view/index pages is an example. You can look at the Customer Business Unit View Page for an example.
+
+2. Add attachment to your entity. An Example is https://github.com/oroinc/crm/blob/master/src/Oro/Bundle/SalesBundle/Migrations/Schema/v1_7/OpportunityAttachment.php#L40-L56
+
+3. Create view controller and view page for the PO entity similar to any other view page of the application (example - https://github.com/oroinc/crm/blob/master/src/Oro/Bundle/SalesBundle/Controller/OpportunityController.php#L22-L37, https://github.com/oroinc/crm/blob/master/src/Oro/Bundle/SalesBundle/Resources/views/Opportunity/view.html.twig)
+
+4. Render there all information from PO entity (with or without separate info widget, no big difference here)
+
+5 Add index page with grid of all PO entities, filter by Order Id/Number is recommended (example - https://github.com/oroinc/crm/blob/master/src/Oro/Bundle/SalesBundle/Controller/OpportunityController.php#L81-L96, https://github.com/oroinc/crm/blob/master/src/Oro/Bundle/SalesBundle/Resources/views/Opportunity/index.html.twig, https://github.com/oroinc/crm/blob/master/src/Oro/Bundle/SalesBundle/Resources/config/oro/datagrids.yml#L2)
+The fields grid should show Customer, PO#, Order Placed, Order # (from PO Line time correlation id)
+
+6 Add menu item to access index page (example - https://github.com/oroinc/crm/blob/master/src/Oro/Bundle/SalesBundle/Resources/config/oro/navigation.yml#L19-L25, https://github.com/oroinc/crm/blob/master/src/Oro/Bundle/SalesBundle/Resources/config/oro/navigation.yml#L88)
+The menu should appear under Sales -> (Just below orders) Purchase Orders
+As this moment if everything is done properly we already should be able to see all information about you PO entity (maybe even have a main entity grid) and be able to assign attachment to PO entity from view page.

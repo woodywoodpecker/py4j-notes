@@ -1,0 +1,3 @@
+tail -f /var/opt/oro/oro-php71/log/php-fpm/error.log
+
+

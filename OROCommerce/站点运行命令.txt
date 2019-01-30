@@ -1,6 +1,157 @@
 cd /home/vagrant/project/oroapp
 
 seo "php bin/console cache:clear --env=dev" // 清理dev的cache
-seo "php bin/console oro:assets:install"    // install
-seo "php bin/console assetic:dump"          // 打包
+seo 'php bin/console cache:clear --env=dev --no-optional-warmers --no-debug'
+seo "php bin/console oro:assets:install --env=dev"    // install
+seo "php bin/console assetic:dump --env=dev"          // 打包
+
+php bin/console oro:requirejs:build --env=dev
+
+chown -R apache:apache ../orodata/
+
+php bin/console redis:flushall --client=cache -n
+
+php bin/console cache:clear --env=dev && chown -R apache:apache ../orodata/ && php bin/console oro:assets:install && php bin/console assetic:dump
+
+php bin/console cache:clear --env=dev && chown -R apache:apache var/
+
+php bin/console  oro:translation:load --env=dev
+php bin/console oro:translation:load  --env=dev --rebuild-cache
+php bin/console oro:localization:dump  --env=dev
+php bin/console oro:translation:dump  --env=dev
+
+php bin/console oro:platform:update --env=dev --force
+php bin/console oro:platform:update --env=dev  --force --skip-search-reindexation  --skip-assets
+
+systemctl restart rh-postgresql96-postgresql oro-rabbitmq-server36-rabbitmq-server oro-redis4-redis oro-elasticsearch62-elasticsearch oro-php71-php-fpm nginx supervisord
+
+------------------------------------------------------------
+
+php bin/console oro:assets:install --symlink --env=prod
+ln -s /opt/project/oroapp/vendor/tinymce/tinymce /opt/project/oroapp/public/bundles
+
+qq-smtp-password:jbiirodymfjkifjj
+
+
+10.10.0.110
+1025
+no-reply@aaxisgroup.com
+
+
+sudo su - postgres -c 'pg_dump -U postgres -d oro -f /tmp/dump.sql'
+sql文件里面把 rri.demo全部替换了。
+import
+sudo su - postgres -c 'psql -U postgres -d oro -f /tmp/dump.sql'
+然后拷贝 var/attachment 目录下面的东西下来。
+编索引
+seo 'php bin/console oro:search:reindex'
+seo 'php bin/console oro:website-search:reindex'
+进admin把theme和webcatalog改了。
+
+slack start===========================>
+nzhi@aaxiscommerce.com
+AJ*zTH6He8#BTJbiUE
+Slack
+<==============================slack end
+
+使dev模式开发反应快点=======================>
+sed -i 's/pm.*=.*dynamic/pm = ondemand/g' /etc/opt/oro/oro-php71/php-fpm.d/www.conf
+sed -i 's/pm.max_children.*=.*/pm.max_children = 2/g' /etc/opt/oro/oro-php71/php-fpm.d/www.conf
+sed -i 's/;request_terminate_timeout.*/request_terminate_timeout = 1m/g' /etc/opt/oro/oro-php71/php-fpm.d/www.conf
+<=====================================end
+
+
+start====================================>
+RRI-204
+Rri/Bundle/ProductListBundle/Resources/views/layouts/blank/imports/oro_datagrid_server_render/rri_server_render_datagrid.html.twig
+
+
+<====================================end
+
+oro.demo config==========================>
+10.10.100.46 oro.demo
+aaxis oro@aaxis
+admin/p455w0rd
+<====================================end
+
+
+Oro\Bundle\ProductBundle\Migrations\Schema
+OroProductBundleInstaller
+
+
+========>
+If you login http://edge-intg.aaxisaws.com with
+Username: nwang@aaxiscommerce.com
+Password: Password1
+<=========
+
+
+elastic search===================> 
+curl -X PUT "localhost:9200/_settings" -H 'Content-Type: application/json' -d '{"index.blocks.read_only_allow_delete": null}'
+<==========================
+
+https://app.zeplin.io/project/5b476a06f8a6bbfe358ca4e7/screen/5c1028e26124c7af1cf0a7d1===============>
+zeplin:
+nram_aaxis
+Zulu-Entha-182
+<===================================================================================================
+
+===========
+php bin/console oro:translation:load --env=dev
+php bin/console oro:workflow:definitions:load --env=dev
+<==============
+
+=========>rri.uat
+52.25.194.16:22
+aaxis
+4QLfbfhfARnc
+<=========
+
+=========>
+vHK2nHbL----
+2019-01-16T08:41:15.163696Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: xePx-li&n4Cy
+2019-01-16T08:41:29.585406Z 0 [System] [MY-013170] [Server] /usr/sbin/mysqld (mysqld 8.0.13) initializing of server has completed
+2019-01-16T08:41:36.593502Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 15492
+2019-01-16T08:41:39.816924Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+
+
+============》
+php bin/console oro:entity-config:update
+php bin/console oro:entity-config:cache:clear
+《===========
+
+
+
+
+
+
+
+
+
+systemctl restart rh-postgresql96-postgresql;
+psql -U postgres -c "DROP DATABASE oro_5;";
+psql -U postgres -c "CREATE DATABASE oro_5;";
+psql -U postgres -d oro_5 -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";';
+psql -U postgres -d oro_5 -f db-bak/dump.sql.oro_5.20190125000001
+
+
+php ./bin/console oro:message-queue:consume --env=dev
+
+
+oro_rel_1cf73d31722a5d735ab5fb
+
+php ./bin/console oro:message-queue:consume --env=dev -vvv
+
+
+
+
+systemctl restart rh-postgresql96-postgresql;
+psql -U postgres -c "DROP DATABASE brkmp;";
+psql -U postgres -c "CREATE DATABASE brkmp;";
+psql -U postgres -d brkmp -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";';
+psql -U postgres -d brkmp -f dump.sql.oro.20190123183719
+
+['cascade' => ['all']
+
+yvonnewang@aaxischina.com
 

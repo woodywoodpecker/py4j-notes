@@ -1,0 +1,35 @@
+Username:
+bloatedyak-business_api1.yahoo.com
+Password:L6UEE8YJ26G29NGN
+Signature:As4GkAgugUWZWYS6RH3WcaAxjRnxA0D-ONBjltYC6a6JajIhinNzWO3a
+
+https://oroinc.com/b2b-ecommerce/doc/1.6/admin-guide/payment/payment-methods/paypal-payflow-gateway#sys-integrations-manage-integrations-paypal-payflow-gateway
+
+https://developer.paypal.com/docs/classic/payflow/integration-guide/#transaction-responses
+
+https://www.sandbox.paypal.com/webapps/mpp/payflow-payment-gateway
+
+https://registration.paypal.com/welcomePage.do?producttype=C2&country=US&mode=try#ProcessorSelectionNode
+
+
+1.Create a business account in the sandbox
+
+2.Create a test-only Payflow Gateway account	
+=> https://registration.paypal.com/welcomePage.do?country=US&mode=try
+Business Name=>bussiness warren
+Login Name=>warrenpy
+Password=>vHK2nHbL
+Full Name=>warren pu
+
+
+
+3.Set up PayPal Manager	
+=> https://manager.paypal.com/securityQuestionPage.do
+Your Partner ID: PayPal
+Your Unique Vendor ID: warrenpy
+
+
+To test non-PayPal credit card processing, use this test credit card information:
+Visa number - 4111111111111111
+Expiration date - 12/19
+Card security code - 123

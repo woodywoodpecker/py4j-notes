@@ -1,0 +1,92 @@
+Web Services API
+=>https://oroinc.com/b2b-ecommerce/doc/current/dev-guide/web-api
+
+http://oro.local/admin/api/doc/rest_json_api
+
+php bin/console oro:api:chache:clear
+
+php bin/console oro:api:doc:cache:clear
+
+php bin/console oro:api:dump	=>	查看有哪些entities可以被data api所访问
+
+[root@localhost oroapp]# php bin/console oro:api:config:dump "Rri\Bundle\DesignerToolsBundle\Entity\ColorOption"
+Rri\Bundle\DesignerToolsBundle\Entity\ColorOption:
+    disable_inclusion: true
+    post_serialize: 'instance of Oro\Bundle\ApiBundle\Processor\CustomizeLoadedData\Handler\EntityHandler'
+    exclusion_policy: all
+    fields:
+        label: null
+        hex: null
+        serialized_data:
+            exclude: true
+        id: null
+    identifier_field_names:
+        - id
+    filters:
+        exclusion_policy: all
+        fields:
+            id:
+                allow_array: true
+                allow_range: true
+                data_type: integer
+    sorters:
+        exclusion_policy: all
+        fields:
+            id: null
+[root@localhost oroapp]# 
+
+
+
+
+
+
+
+
+How to use WSSE authentication
+https://oroinc.com/b2b-ecommerce/doc/current/dev-guide/other/how-to-use-wsse-authentication
+
+https://oroinc.com/b2b-ecommerce/doc/current/dev-guide/web-api#create-an-api-key
+
+[root@localhost oroapp]# php bin/console oro:wsse:generate-header d34198793e3671c17002df6e87f2e70ea123ff06
+To use WSSE authentication add following headers to the request:
+Authorization: WSSE profile="UsernameToken"
+X-WSSE: UsernameToken Username="admin", PasswordDigest="QCxH9WYYqdSg+S1O7hf1AHxxAQI=", Nonce="MzJmNGFjNWUyOWUwYzNjNg==", Created="2018-09-25T06:33:28+00:00"
+
+[root@localhost oroapp]# 
+
+postman ====================>
+http://oro.local/admin/api/product_image_zones
+Accept:application/json
+Authorization:WSSE profile="UsernameToken"
+X-WSSE:UsernameToken Username="admin", PasswordDigest="QCxH9WYYqdSg+S1O7hf1AHxxAQI=", Nonce="MzJmNGFjNWUyOWUwYzNjNg==", Created="2018-09-25T06:33:28+00:00"
+[
+    {
+        "locationCode": "zon1",
+        "price": "0",
+        "width": 33,
+        "height": 44,
+        "cy": 22,
+        "cx": 11,
+        "rotation": 777,
+        "comment": "zzzzzzzz",
+        "name": "qqqqqqq",
+        "id": 1
+    },
+    {
+        "locationCode": "zone2",
+        "price": "0",
+        "width": 10,
+        "height": 28,
+        "cy": 77,
+        "cx": 88,
+        "rotation": 90,
+        "comment": "hahaahah",
+        "name": "this is for ttest +++",
+        "id": 2
+    }
+]
+
+
+
+
+

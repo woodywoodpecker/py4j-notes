@@ -1,0 +1,54 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: johnzhu
+ * Date: 7/25/2018
+ * Time: 11:37 AM
+ */
+
+namespace Rri\Bundle\DesignerToolsBundle\Controller;
+
+use Oro\Bundle\ApiBundle\Controller\RestApiController;
+use Oro\Bundle\PricingBundle\Entity\PriceListToProduct;
+use Rri\Bundle\DesignerToolsBundle\Utils\JsonUtil;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Oro\Bundle\LayoutBundle\Annotation\Layout;
+use Symfony\Component\HttpFoundation\Response;
+use Oro\Bundle\ProductBundle\Entity\Product;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Oro\Bundle\ProductBundle\Entity\Brand;
+
+class DesignerToolsController extends RestApiController
+{
+    /**
+     * @Route("/path/to/designer/tool", name="rri_designer_tools")
+     * @Layout
+     */
+    public function indexAction()
+    {
+        return [];
+    }
+
+    /**
+     * @Route("/rri/product/{id}")
+     */
+    public function numberAction($id)
+    {
+        //$priceListToProducts = $this->getDoctrine()->getManager()->getRepository(PriceListToProduct::class)->findAll();
+
+        $product = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy(['id' => $id]);
+
+        if (!$product or count($product) == 0) {
+            self::fail(sprintf('Can\'t find product with id "%s"', $id));
+        }
+
+        $encodes = JsonUtil::toJson($product[0]);
+
+        return new Response(
+            //$product[0]->getMarkupPrice()
+            $encodes
+        );
+    }
+
+}

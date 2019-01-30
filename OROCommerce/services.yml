@@ -1,0 +1,14 @@
+parameters:
+  oro_ups.address.validation.url: 'https://onlinetools.ups.com/ups.app/xml/XAV'
+  oro_ups.address.validation.number: 'FD28F276BA93AFD9'
+  oro_ups.address.validation.user: 'johnapi'
+  oro_ups.address.validation.passowrd: 'RRI123!z78'
+  oro_ups.address.validation.log.enable: true
+
+services:
+  rri_shipping.validate.listener:
+    class: Rri\Bundle\ShippingBundle\EventListener\ShippingAddressListener
+    arguments:
+        - '@service_container'
+    tags:
+        - { name: kernel.event_listener, event: kernel.request, method: onKernelRequestBeforeRouting, priority: 255 }

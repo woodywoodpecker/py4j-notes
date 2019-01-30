@@ -1,0 +1,63 @@
+
+/opt/project/oroapp/vendor/oro/commerce/src/Oro/Bundle/ProductBundle/Resources/views/layouts/default/config/images.yml
+控制admin datagrid product image的展示
+
+1.定义entity,
+
+
+2.写migration file
+
+
+3.php bin/console oro:migration:load --force
+
+
+4.给entity配置@Config	use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+
+
+5.php bin/console oro:entity-config:update
+
+
+
+=======================================================================================================================
+product image 编辑
+/opt/project/oroapp/vendor/oro/commerce/src/Oro/Bundle/ProductBundle/Resources/views/image_macros.html.twig
+/opt/project/oroapp/vendor/oro/commerce/src/Oro/Bundle/ProductBundle/Resources/views/Form/fields.html.twig	line:180
+/opt/project/oroapp/vendor/oro/commerce/src/Oro/Bundle/ProductBundle/Resources/config/form_types.yml (service)
+
+
+
+
+
+
+
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+[2018-08-31 09:49:27] request.CRITICAL: Uncaught PHP Exception Symfony\Component\Debug\Exception\ContextErrorException: "Notice: Undefined index: productimage_image_zones" at /opt/project/orodata/vendor/doctrine/orm/lib/Doctrine/ORM/Persisters/Entity/BasicEntityPersister.php line 1794 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\ContextErrorException(code: 0): Notice: Undefined index: productimage_image_zones at /opt/project/orodata/vendor/doctrine/orm/lib/Doctrine/ORM/Persisters/Entity/BasicEntityPersister.php:1794)"} []
+
+        /**
+         * BasicEntityPersister->getOneToManyStatement(
+         * array('fieldName' => 'imageZones','targetEntity' => 'Rri\\Bundle\\ProductBundle\\Entity\\ProductImageZone',
+         *       'mappedBy' => 'productimage_imageZones', 'cascade' => array('detach'), 'type' => 4,
+         *       'inversedBy' => null, 'isOwningSide' => false,
+         *       'sourceEntity' => 'Oro\\Bundle\\ProductBundle\\Entity\\ProductImage', 'fetch' => 2,
+         *       'isCascadeRemove' => false, 'isCascadePersist' => false, 'isCascadeRefresh' => false,
+         *       'isCascadeMerge' => false, 'isCascadeDetach' => true, 'orphanRemoval' => false),
+         * object(ProductImage))
+         */
+
+
+
+
+
+
+Configure many-to-one associations ////////////////////// start //////////////////////
+1，增加一个以Extend开头的拥有association的class放到Model这个目录下
+2，在这个class里面声明几个空的helper方法
+3，
+
+
+
+{{ dump(child.colorOptionId.vars.choices) }}

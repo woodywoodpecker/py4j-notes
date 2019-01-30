@@ -1,0 +1,32 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: root
+ * Date: 8/2/18
+ * Time: 9:03 AM
+ */
+
+namespace Rri\Bundle\DesignerToolsBundle\Utils;
+
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+
+class JsonUtil {
+
+    public static function toJson ($object) {
+        if ($object) {
+            $encoders = array(new XmlEncoder(), new JsonEncoder());
+            $normalizers = array(new JsonSerializableNormalizer());
+            $serializer  = new Serializer($normalizers, $encoders);
+            $jsonContent = $serializer->serialize($object, 'json');
+            return $jsonContent;
+        }
+        else {
+            return null;
+        }
+    }
+
+}
+

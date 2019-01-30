@@ -1,0 +1,47 @@
+bin/console assets:install --symlink
+
+config the yml for emails like smtp
+oro.local:1080
+
+创建一个在bundle外面的controller
+controllers:
+    resource: '../src/Controller'
+    type: annotation
+
+
+debug:autowiring
+debug:container
+debug:config
+
+Mediator Pattern
+
+EventDispatcher
+
+debug:event-dispatcher
+debug:event-dispatcher kernel.exception
+
+debug:config security
+config:dump security
+config:dump-reference security
+
+https://github.com/anyt/aaxis-training/pull/1/files
+https://github.com/anyt/aaxis-training/pull/2/files
+https://github.com/anyt/aaxis-training/pull/3/files
+https://github.com/anyt/aaxis-training/pull/4/files
+https://github.com/anyt/aaxis-training/pull/5/files
+https://github.com/anyt/aaxis-training/pull/6/files
+https://github.com/anyt/aaxis-training/pull/7/files
+https://github.com/anyt/aaxis-training/pull/8/files
+
+
+block_prefixes
+
+twig inspector
+
+Display all layout data providers 
+bin/console debug:container --tag=layout.data_provider --show-private
+
+layout.yml=>
+	conditions: !context['product']
+
+
