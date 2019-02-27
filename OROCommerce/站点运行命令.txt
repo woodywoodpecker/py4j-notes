@@ -155,3 +155,16 @@ psql -U postgres -d brkmp -f dump.sql.oro.20190123183719
 
 yvonnewang@aaxischina.com
 
+
+
+php bin/console oro:cron:definitions:load
+
+
+
+
+php bin/console assets:install --env=prod
+npm --no-audit install
+php bin/console oro:assets:build --env=prod
+php bin/console cache:clear --env=prod
+php bin/console redis:flushall --client=cache -n
+
